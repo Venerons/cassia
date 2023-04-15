@@ -48,9 +48,9 @@ export default {
         { type: 'item', label: 'Atbash', to: '/atbash' },
         { type: 'item', label: 'Caesar', to: '/caesar' },
         { type: 'item', label: 'Carbonaro', to: '/carbonaro' },
-        { type: 'item', label: 'Pigpen', to: '/pigpen' }, // TODO
+        //{ type: 'item', label: 'Pigpen', to: '/pigpen' }, // TODO
         { type: 'item', label: 'ROT13', to: '/rot13' },
-        // https://en.wikipedia.org/wiki/Theban_script
+        { type: 'item', label: 'Theban', to: '/theban' },
         // custom substitution cipher
         // custom shift cipher
 
@@ -79,7 +79,7 @@ export default {
         /*
         { type: 'item', label: 'XOR', to: '/' },
         { type: 'item', label: 'Vernam One-Time Pad', to: '/' },
-        { type: 'item', label: 'Pizzini', to: '/' },
+        { type: 'item', label: 'Pizzini', to: '/' }, https://en.wikipedia.org/wiki/Pizzino
         { type: 'item', label: 'Polibio', to: '/' },
         { type: 'item', label: 'Pollux', to: '/' },
         { type: 'item', label: 'VIC', to: '/' },
@@ -90,10 +90,10 @@ export default {
         // Encodings
         { type: 'separator' },
         { type: 'header', label: 'Encodings' },
+        { type: 'item', label: 'Base2', to: '/base2' },
+        { type: 'item', label: 'Base16', to: '/base16' },
         { type: 'item', label: 'Base64', to: '/base64' },
-        { type: 'item', label: 'Binary', to: '/binary' },
-        { type: 'item', label: 'Leet', to: '/leet' },
-        { type: 'item', label: 'Morse', to: '/morse' },
+        //{ type: 'item', label: 'Morse', to: '/morse' },
         { type: 'item', label: 'URL Encoding', to: '/urlencoding' },
 
         // Key Generators

@@ -11,10 +11,11 @@ const routes = [
       { path: '/carbonaro', component: () => import('pages/Carbonaro.vue') },
       //{ path: '/pigpen', component: () => import('pages/Pigpen.vue') },
       { path: '/rot13', component: () => import('pages/Rot13.vue') },
+      { path: '/theban', component: () => import('pages/Theban.vue') },
 
+      { path: '/base2', component: () => import('pages/Base2.vue') },
+      { path: '/base16', component: () => import('pages/Base16.vue') },
       { path: '/base64', component: () => import('pages/Base64.vue') },
-      //{ path: '/binary', component: () => import('pages/Binary.vue') },
-      //{ path: '/leet', component: () => import('pages/Leet.vue') },
       //{ path: '/morse', component: () => import('pages/Morse.vue') },
       { path: '/urlencoding', component: () => import('pages/URLEncoding.vue') },
 
