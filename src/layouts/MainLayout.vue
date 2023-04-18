@@ -4,9 +4,8 @@
     <q-header bordered class="bg-primary text-white">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-
         <q-toolbar-title>
-          cassia
+          Project Cassia
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -18,7 +17,8 @@
             <q-item-label header v-if="item.type === 'header'">{{ item.label }}</q-item-label>
             <q-item v-if="item.type === 'item'" clickable v-ripple :to="item.to">
               <q-item-section>
-                {{ item.label }}
+                <q-item-label>{{ item.label }}</q-item-label>
+                <q-item-label v-if="item.caption" caption>{{ item.caption }}</q-item-label>
               </q-item-section>
             </q-item>
             <q-separator v-if="item.type === 'separator'"/>
@@ -91,8 +91,10 @@ export default {
         // Encodings
         { type: 'separator' },
         { type: 'header', label: 'Encodings' },
-        { type: 'item', label: 'Base2', to: '/base2' },
-        { type: 'item', label: 'Base16', to: '/base16' },
+        { type: 'item', label: 'Base2', caption: 'Binary', to: '/base2' },
+        { type: 'item', label: 'Base8', caption: 'Octal', to: '/base8' },
+        { type: 'item', label: 'Base10', caption: 'Decimal', to: '/base10' },
+        { type: 'item', label: 'Base16', caption: 'Hexadecimal', to: '/base16' },
         { type: 'item', label: 'Base64', to: '/base64' },
         //{ type: 'item', label: 'Morse', to: '/morse' },
         { type: 'item', label: 'URL Encoding', to: '/urlencoding' },
@@ -104,6 +106,7 @@ export default {
         { type: 'item', label: 'Fibonacci Sequence', to: '/fibonacci' },
         { type: 'item', label: 'Collatz Conjecture', to: '/collatz' },
         { type: 'item', label: 'Random Key', to: '/randomkey' },
+        //{ type: 'item', label: 'Gödel Numbering', to: '/godel' }, https://en.wikipedia.org/wiki/G%C3%B6del_numbering
       ]
     }
   },

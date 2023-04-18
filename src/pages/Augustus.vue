@@ -39,7 +39,7 @@
       readonly
       class="q-my-md"
     />
-    <p class="text-body1">The Augustus Cipher is an ancient shift cipher, where each letter is shifter 1 position down the alphabet.</p>
+    <p class="text-body1">The Augustus Cipher is an ancient shift cipher, where each letter is shifted 1 position down the alphabet.</p>
   </q-page>
 </template>
 

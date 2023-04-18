@@ -15,6 +15,8 @@ const routes = [
       { path: '/theban', component: () => import('pages/Theban.vue') },
 
       { path: '/base2', component: () => import('pages/Base2.vue') },
+      { path: '/base8', component: () => import('pages/Base8.vue') },
+      { path: '/base10', component: () => import('pages/Base10.vue') },
       { path: '/base16', component: () => import('pages/Base16.vue') },
       { path: '/base64', component: () => import('pages/Base64.vue') },
       //{ path: '/morse', component: () => import('pages/Morse.vue') },

@@ -1,10 +1,10 @@
 <template>
   <q-page padding>
     <h4 class="text-h4 q-mt-none q-mb-md">
-      Base16 Encoding
+      Base8 Encoding
     </h4>
     <div class="row">
-      <a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank">
+      <a href="https://en.wikipedia.org/wiki/Octal" target="_blank">
         <q-chip square color="accent" text-color="white" icon="fa-brands fa-wikipedia-w">Wikipedia</q-chip>
       </a>
       <q-chip square color="primary" text-color="white">Encoding</q-chip>
@@ -70,20 +70,18 @@ export default {
       }
     },
     encode(input) {
-      const buffer = new TextEncoder().encode(input).buffer;
-      const array = new Uint8Array(buffer);
-      const output = [];
-      array.forEach((byte) => {
-        output.push(byte.toString(16).padStart(2, '0'));
-      });
+      let output = [];
+      for (let i = 0; i < input.length; ++i) {
+        output.push(input.codePointAt(i).toString(8).padStart(3, '0'));
+      }
       return output.join('');
     },
     decode(input) {
-      const output = new Uint8Array(input.length / 2);
-      for (let i = 0; i < output.byteLength; ++i) {
-        output[i] = parseInt(input.substring(i * 2, i * 2 + 2), 16);
+      let output = [];
+      for (let i = 0; i < input.length / 3; ++i) {
+        output.push(String.fromCodePoint(parseInt(input.substring(i * 3, i * 3 + 3), 8)));
       }
-      return new TextDecoder('utf-8').decode(output.buffer);
+      return output.join('');
     }
   }
 }

@@ -42,7 +42,7 @@
 export default {
   data() {
     return {
-      input_length: 16,
+      input_length: 32,
       input_charset: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
       output: ''
     }

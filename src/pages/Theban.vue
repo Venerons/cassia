@@ -19,10 +19,16 @@
       type="textarea"
       class="q-my-md"
     />
-    <q-btn-group spread class="q-my-md">
-      <q-btn label="Encrypt" color="primary" @click="encrypt" />
-      <q-btn label="Decrypt" color="primary" @click="decrypt" />
-    </q-btn-group>
+    <q-btn-toggle
+      v-model="action"
+      spread
+      toggle-color="primary"
+      class="q-my-md"
+      :options="[
+        { label: 'Encrypt', value: 'encrypt' },
+        { label: 'Decrypt', value: 'decrypt' }
+      ]"
+    />
     <q-input
       v-model="output"
       label="Output"
@@ -40,39 +46,51 @@ export default {
   data() {
     return {
       input: '',
+      action: 'encrypt',
       output: ''
     }
   },
-  methods: {
-    encrypt() {
-      this.output = '';
-      if (!this.input) {
-        return;
-      }
-      const alfa = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-      const beta = ['ሃ', 'ቧ', 'ሣ', 'ካ', 'ኪ', 'ሢ', 'ህ', 'ኑ', 'ሀ', 'ሀ', 'ጣ', 'ኒ', 'ኳ', 'ኡ', 'ጤ', 'ጢ', 'ቈ', 'ጣ', 'ኴ', 'ኲ', 'የ', 'የ', 'የ', 'ሇ', 'ኚ', 'ሗ'];
-      let output = '';
-      for (let i = 0; i < this.input.length; ++i) {
-        const c = this.input.charAt(i).toUpperCase();
-        const ord = alfa.indexOf(c);
-        output += ord >= 0 ? beta[ord] : c;
-      }
-      this.output = output;
+  watch: {
+    input(newValue, oldValue) {
+      this.update_output();
     },
-    decrypt() {
+    action(newValue, oldValue) {
+      this.update_output();
+    }
+  },
+  methods: {
+    update_output() {
       this.output = '';
       if (!this.input) {
         return;
       }
-      const alfa = ['ሃ', 'ቧ', 'ሣ', 'ካ', 'ኪ', 'ሢ', 'ህ', 'ኑ', 'ሀ', 'ሀ', 'ጣ', 'ኒ', 'ኳ', 'ኡ', 'ጤ', 'ጢ', 'ቈ', 'ጣ', 'ኴ', 'ኲ', 'የ', 'የ', 'የ', 'ሇ', 'ኚ', 'ሗ'];
-      const beta = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'I', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'V', 'V', 'X', 'Y', 'Z'];
-      let output = '';
-      for (let i = 0; i < this.input.length; ++i) {
-        const c = this.input.charAt(i);
-        const ord = alfa.indexOf(c);
-        output += ord >= 0 ? beta[ord] : c;
+      if (this.action === 'encrypt') {
+        this.output = this.encrypt(this.input);
+      } else if (this.action === 'decrypt') {
+        this.output = this.decrypt(this.input);
       }
-      this.output = output;
+    },
+    encrypt(input) {
+      const dec = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+      const enc = ['ሃ', 'ቧ', 'ሣ', 'ካ', 'ኪ', 'ሢ', 'ህ', 'ኑ', 'ሀ', 'ሀ', 'ጣ', 'ኒ', 'ኳ', 'ኡ', 'ጤ', 'ጢ', 'ቈ', 'ጣ', 'ኴ', 'ኲ', 'የ', 'የ', 'የ', 'ሇ', 'ኚ', 'ሗ'];
+      let output = '';
+      for (let i = 0; i < input.length; ++i) {
+        const char = input.charAt(i).toUpperCase();
+        const index = dec.indexOf(char);
+        output += index !== -1 ? enc[index] : char;
+      }
+      return output;
+    },
+    decrypt(input) {
+      const dec = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+      const enc = ['ሃ', 'ቧ', 'ሣ', 'ካ', 'ኪ', 'ሢ', 'ህ', 'ኑ', 'ሀ', 'ሀ', 'ጣ', 'ኒ', 'ኳ', 'ኡ', 'ጤ', 'ጢ', 'ቈ', 'ጣ', 'ኴ', 'ኲ', 'የ', 'የ', 'የ', 'ሇ', 'ኚ', 'ሗ'];
+      let output = '';
+      for (let i = 0; i < input.length; ++i) {
+        const char = input.charAt(i);
+        const index = enc.indexOf(char);
+        output += index !== -1 ? dec[index] : char;
+      }
+      return output;
     }
   }
 }

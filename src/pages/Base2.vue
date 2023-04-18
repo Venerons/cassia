@@ -18,10 +18,16 @@
       type="textarea"
       class="q-my-md"
     />
-    <q-btn-group spread class="q-my-md">
-      <q-btn label="Encode" color="primary" @click="encrypt" />
-      <q-btn label="Decode" color="primary" @click="decrypt" />
-    </q-btn-group>
+    <q-btn-toggle
+      v-model="action"
+      spread
+      toggle-color="primary"
+      class="q-my-md"
+      :options="[
+        { label: 'Encode', value: 'encode' },
+        { label: 'Decode', value: 'decode' }
+      ]"
+    />
     <q-input
       v-model="output"
       label="Output"
@@ -39,31 +45,43 @@ export default {
   data() {
     return {
       input: '',
+      action: 'encode',
       output: ''
     }
   },
-  methods: {
-    encrypt() {
-      this.output = '';
-      if (!this.input) {
-        return;
-      }
-      let output = [];
-      for (let i = 0; i < this.input.length; ++i) {
-        output.push(this.input.codePointAt(i).toString(2).padStart(8, '0'));
-      }
-      this.output = output.join('');
+  watch: {
+    input(newValue, oldValue) {
+      this.update_output();
     },
-    decrypt() {
+    action(newValue, oldValue) {
+      this.update_output();
+    }
+  },
+  methods: {
+    update_output() {
       this.output = '';
       if (!this.input) {
         return;
       }
-      let output = [];
-      for (let i = 0; i < this.input.length / 8; ++i) {
-        output.push(String.fromCodePoint(parseInt(this.input.substring(i * 8, i * 8 + 8), 2)));
+      if (this.action === 'encode') {
+        this.output = this.encode(this.input);
+      } else if (this.action === 'decode') {
+        this.output = this.decode(this.input);
       }
-      this.output = output.join('');
+    },
+    encode(input) {
+      let output = [];
+      for (let i = 0; i < input.length; ++i) {
+        output.push(input.codePointAt(i).toString(2).padStart(8, '0'));
+      }
+      return output.join('');
+    },
+    decode(input) {
+      let output = [];
+      for (let i = 0; i < input.length / 8; ++i) {
+        output.push(String.fromCodePoint(parseInt(input.substring(i * 8, i * 8 + 8), 2)));
+      }
+      return output.join('');
     }
   }
 }

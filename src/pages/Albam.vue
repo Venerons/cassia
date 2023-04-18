@@ -36,7 +36,7 @@
       readonly
       class="q-my-md"
     />
-    <p class="text-body1">The Albam Cipher is an ancient Hebrew shift cipher, where each letter is shifter 11 positions down the alphabet.</p>
+    <p class="text-body1">The Albam Cipher is an ancient Hebrew shift cipher, where each letter is shifted 11 positions down the alphabet.</p>
   </q-page>
 </template>
 

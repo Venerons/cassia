@@ -18,10 +18,16 @@
       type="textarea"
       class="q-my-md"
     />
-    <q-btn-group spread class="q-my-md">
-      <q-btn label="Encode" color="primary" @click="encrypt" />
-      <q-btn label="Decode" color="primary" @click="decrypt" />
-    </q-btn-group>
+    <q-btn-toggle
+      v-model="action"
+      spread
+      toggle-color="primary"
+      class="q-my-md"
+      :options="[
+        { label: 'Encode', value: 'encode' },
+        { label: 'Decode', value: 'decode' }
+      ]"
+    />
     <q-input
       v-model="output"
       label="Output"
@@ -39,25 +45,37 @@ export default {
   data() {
     return {
       input: '',
+      action: 'encode',
       output: ''
     }
   },
-  methods: {
-    encrypt() {
-      this.output = '';
-      if (!this.input) {
-        return;
-      }
-      const encode = encodeURIComponent(this.input).replace(/%([a-f0-9]{2})/gi, (m, $1) => String.fromCharCode(parseInt($1, 16)));
-	    this.output = btoa(encode);
+  watch: {
+    input(newValue, oldValue) {
+      this.update_output();
     },
-    decrypt() {
+    action(newValue, oldValue) {
+      this.update_output();
+    }
+  },
+  methods: {
+    update_output() {
       this.output = '';
       if (!this.input) {
         return;
       }
-      const decode = atob(this.input).replace(/[\x80-\uffff]/g, (m) => `%${m.charCodeAt(0).toString(16).padStart(2, '0')}`);
-	    this.output = decodeURIComponent(decode);
+      if (this.action === 'encode') {
+        this.output = this.encode(this.input);
+      } else if (this.action === 'decode') {
+        this.output = this.decode(this.input);
+      }
+    },
+    encode(input) {
+      const encode = encodeURIComponent(input).replace(/%([a-f0-9]{2})/gi, (m, $1) => String.fromCharCode(parseInt($1, 16)));
+	    return btoa(encode);
+    },
+    decode(input) {
+      const decode = atob(input).replace(/[\x80-\uffff]/g, (m) => `%${m.charCodeAt(0).toString(16).padStart(2, '0')}`);
+	    return decodeURIComponent(decode);
     }
   }
 }

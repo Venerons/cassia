@@ -17,8 +17,7 @@
       class="q-my-md"
     />
     <q-btn-group spread class="q-my-md">
-      <q-btn label="Encrypt" color="primary" @click="encrypt" />
-      <q-btn label="Decrypt" color="primary" @click="decrypt" />
+      <q-btn label="Encrypt / Decrypt" color="primary" />
     </q-btn-group>
     <q-input
       v-model="output"
@@ -40,36 +39,29 @@ export default {
       output: ''
     }
   },
+  watch: {
+    input(newValue, oldValue) {
+      this.update_output();
+    }
+  },
   methods: {
-    encrypt() {
+    update_output() {
       this.output = '';
       if (!this.input) {
         return;
       }
-      const alfa = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-      const beta = 'OPGTIVCHEJKRNMABQLZDUFWXYSopgtivchejkrnmabqlzdufwxys';
-      let output = '';
-      for (let i = 0; i < this.input.length; ++i) {
-        const c = this.input.charAt(i);
-        const ord = alfa.indexOf(c);
-        output += ord >= 0 ? beta.charAt(ord) : c;
-      }
-      this.output = output;
+      this.output = this.encrypt(this.input);
     },
-    decrypt() {
-      this.output = '';
-      if (!this.input) {
-        return;
-      }
-      const alfa = 'OPGTIVCHEJKRNMABQLZDUFWXYSopgtivchejkrnmabqlzdufwxys';
-      const beta = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    encrypt(input) {
+      const dec = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      const enc = 'OPGTIVCHEJKRNMABQLZDUFWXYSopgtivchejkrnmabqlzdufwxys';
       let output = '';
-      for (let i = 0; i < this.input.length; ++i) {
-        const c = this.input.charAt(i);
-        const ord = alfa.indexOf(c);
-        output += ord >= 0 ? beta.charAt(ord) : c;
+      for (let i = 0; i < input.length; ++i) {
+        const char = input.charAt(i);
+        const index = dec.indexOf(char);
+        output += index !== -1 ? enc.charAt(index) : char;
       }
-      this.output = output;
+      return output;
     }
   }
 }

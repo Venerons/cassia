@@ -19,9 +19,6 @@
       filled
       class="q-my-md"
     />
-    <q-btn-group spread class="q-my-md">
-      <q-btn label="Generate" color="primary" @click="generate" />
-    </q-btn-group>
     <q-input
       v-model="output"
       label="Output"
@@ -42,6 +39,11 @@ export default {
       output: ''
     }
   },
+  watch: {
+    input(newValue, oldValue) {
+      this.generate();
+    }
+  },
   methods: {
     generate() {
       this.output = '';
@@ -60,6 +62,9 @@ export default {
       }
       this.output = output.join(' ');
     }
+  },
+  mounted() {
+    this.generate();
   }
 }
 </script>

@@ -20,10 +20,16 @@
       type="textarea"
       class="q-my-md"
     />
-    <q-btn-group spread class="q-my-md">
-      <q-btn label="Encrypt" color="primary" @click="encrypt" />
-      <q-btn label="Decrypt" color="primary" @click="decrypt" />
-    </q-btn-group>
+    <q-btn-toggle
+      v-model="action"
+      spread
+      toggle-color="primary"
+      class="q-my-md"
+      :options="[
+        { label: 'Encrypt', value: 'encrypt' },
+        { label: 'Decrypt', value: 'decrypt' }
+      ]"
+    />
     <q-input
       v-model="output"
       label="Output"
@@ -33,6 +39,7 @@
       readonly
       class="q-my-md"
     />
+    <p class="text-body1">The Caesar Cipher is an ancient shift cipher, where each letter is shifted 3 positions down the alphabet.</p>
   </q-page>
 </template>
 
@@ -41,39 +48,51 @@ export default {
   data() {
     return {
       input: '',
+      action: 'encrypt',
       output: ''
     }
   },
-  methods: {
-    encrypt() {
-      this.output = '';
-      if (!this.input) {
-        return;
-      }
-      const alfa = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      const beta = 'DEFGHIJKLMNOPQRSTUVWXYZABCdefghijklmnopqrstuvwxyzabc3456789012';
-      let output = '';
-      for (let i = 0; i < this.input.length; ++i) {
-        const c = this.input.charAt(i);
-        const ord = alfa.indexOf(c);
-        output += ord >= 0 ? beta.charAt(ord) : c;
-      }
-      this.output = output;
+  watch: {
+    input(newValue, oldValue) {
+      this.update_output();
     },
-    decrypt() {
+    action(newValue, oldValue) {
+      this.update_output();
+    }
+  },
+  methods: {
+    update_output() {
       this.output = '';
       if (!this.input) {
         return;
       }
-      const alfa = 'DEFGHIJKLMNOPQRSTUVWXYZABCdefghijklmnopqrstuvwxyzabc3456789012';
-      const beta = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let output = '';
-      for (let i = 0; i < this.input.length; ++i) {
-        const c = this.input.charAt(i);
-        const ord = alfa.indexOf(c);
-        output += ord >= 0 ? beta.charAt(ord) : c;
+      if (this.action === 'encrypt') {
+        this.output = this.encrypt(this.input);
+      } else if (this.action === 'decrypt') {
+        this.output = this.decrypt(this.input);
       }
-      this.output = output;
+    },
+    encrypt(input) {
+      const dec = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const enc = 'DEFGHIJKLMNOPQRSTUVWXYZABCdefghijklmnopqrstuvwxyzabc3456789012';
+      let output = '';
+      for (let i = 0; i < input.length; ++i) {
+        const char = input.charAt(i);
+        const index = dec.indexOf(char);
+        output += index !== -1 ? enc.charAt(index) : char;
+      }
+      return output;
+    },
+    decrypt(input) {
+      const dec = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const enc = 'DEFGHIJKLMNOPQRSTUVWXYZABCdefghijklmnopqrstuvwxyzabc3456789012';
+      let output = '';
+      for (let i = 0; i < input.length; ++i) {
+        const char = input.charAt(i);
+        const index = enc.indexOf(char);
+        output += index !== -1 ? dec.charAt(index) : char;
+      }
+      return output;
     }
   }
 }

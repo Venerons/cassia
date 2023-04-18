@@ -1,8 +1,8 @@
 {
   "name": "cassia",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "cassia",
+  "description": "A practical guide to cryptography and steganography",
+  "productName": "Project Cassia",
   "author": "Daniele Veneroni <Venerons@users.noreply.github.com>",
   "private": true,
   "scripts": {
