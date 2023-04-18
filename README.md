@@ -1,41 +1,27 @@
-# cassia (cassia)
+# cassia
 
-A Quasar Project
+The cassia project aims to collect a wide range of tools to learn and teach cryptography and steganography and their history.
 
-## Install the dependencies
+## Setup
+
 ```bash
-yarn
-# or
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Start development mode
+
 ```bash
 quasar dev
 ```
 
+### Build and deploy
 
-### Lint the files
 ```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
-
-
-
-### Build the app for production
-```bash
+# 1. build the project
 quasar build
+# 2. commit and push the build
+git commit -m "..."
+git push
+# 3. push the build to the gh-pages subtree branch
+git subtree push --prefix dist/spa origin gh-pages
 ```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).

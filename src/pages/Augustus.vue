@@ -1,9 +1,12 @@
 <template>
   <q-page padding>
     <h4 class="text-h4 q-mt-none q-mb-md">
-      Albam Cipher
+      Augustus Cipher
     </h4>
     <div class="row">
+      <a href="https://en.wikipedia.org/wiki/Caesar_cipher" target="_blank">
+        <q-chip square color="accent" text-color="white" icon="fa-brands fa-wikipedia-w">Wikipedia</q-chip>
+      </a>
       <q-chip square color="primary" text-color="white">Simple Substitution Cipher</q-chip>
       <q-chip square color="primary" text-color="white">Monoalphabetic Cipher</q-chip>
       <q-chip square color="primary" text-color="white">Shift Cipher</q-chip>
@@ -36,7 +39,7 @@
       readonly
       class="q-my-md"
     />
-    <p class="text-body1">The Albam Cipher is an ancient Hebrew shift cipher, where each letter is shifter 11 positions down the alphabet.</p>
+    <p class="text-body1">The Augustus Cipher is an ancient shift cipher, where each letter is shifter 1 position down the alphabet.</p>
   </q-page>
 </template>
 
@@ -71,7 +74,7 @@ export default {
     },
     encrypt(input) {
       const dec = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      const enc = 'LMNOPQRSTUVWXYZABCDEFGHIJKlmnopqrstuvwxyzabcdefghijk1234567890';
+      const enc = 'ZABCDEFGHIJKLMNOPQRSTUVWXYzabcdefghijklmnopqrstuvwxy9012345678';
       let output = '';
       for (let i = 0; i < input.length; ++i) {
         const char = input.charAt(i);
@@ -82,7 +85,7 @@ export default {
     },
     decrypt(input) {
       const dec = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      const enc = 'LMNOPQRSTUVWXYZABCDEFGHIJKlmnopqrstuvwxyzabcdefghijk1234567890';
+      const enc = 'ZABCDEFGHIJKLMNOPQRSTUVWXYzabcdefghijklmnopqrstuvwxy9012345678';
       let output = '';
       for (let i = 0; i < input.length; ++i) {
         const char = input.charAt(i);

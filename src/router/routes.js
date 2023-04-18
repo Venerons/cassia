@@ -7,6 +7,7 @@ const routes = [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: '/albam', component: () => import('pages/Albam.vue') },
       { path: '/atbash', component: () => import('pages/Atbash.vue') },
+      { path: '/augustus', component: () => import('pages/Augustus.vue') },
       { path: '/caesar', component: () => import('pages/Caesar.vue') },
       { path: '/carbonaro', component: () => import('pages/Carbonaro.vue') },
       //{ path: '/pigpen', component: () => import('pages/Pigpen.vue') },

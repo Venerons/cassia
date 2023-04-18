@@ -46,6 +46,7 @@ export default {
         { type: 'header', label: 'Monoalphabetic Ciphers' },
         { type: 'item', label: 'Albam', to: '/albam' },
         { type: 'item', label: 'Atbash', to: '/atbash' },
+        { type: 'item', label: 'Augustus', to: '/augustus' },
         { type: 'item', label: 'Caesar', to: '/caesar' },
         { type: 'item', label: 'Carbonaro', to: '/carbonaro' },
         //{ type: 'item', label: 'Pigpen', to: '/pigpen' }, // TODO
